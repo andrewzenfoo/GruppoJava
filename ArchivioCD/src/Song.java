@@ -34,11 +34,5 @@ public class Song {
         this.lenghtSeconds = lenghtSeconds;
     }
 
-//////////////////////////METODI////////////////////////////////////////////////////////////////////////////////////
-
-    public void description() {
-        System.out.printf("Titolo: %s\n Durata: %d:%d\n", this.title, this.lenghtMinutes, this.lenghtSeconds);
-    }
-
 }
 

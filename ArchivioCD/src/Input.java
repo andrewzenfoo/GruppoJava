@@ -32,6 +32,7 @@ public class Input {
                     library.listAlbum();
                     break;
                 case 3:
+                    System.out.print("Album da mostrare: ");
                     String title;
                     do {
                         title = IO.input();

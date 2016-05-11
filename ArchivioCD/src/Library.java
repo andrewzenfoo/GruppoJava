@@ -2,6 +2,9 @@ import java.util.Vector;
 
 public class Library {
 
+    private static final String LENGHT_ERROR = "La durata non può essere minore di zero";
+    public static final String VOID_INPUT = "Il campo non può essere vuoto";
+
     private Vector<Album> albumList = new Vector<>();
 
     public Library(Vector<Album> albumList) {
@@ -29,12 +32,19 @@ public class Library {
             album.setTitle(IO.input());
             System.out.print("Inserire il nome dell'artista: ");
             album.setAuthor(IO.input());
+            System.out.println("Inserire le canzoni: ");
+            album.addSong();
+
+            if(album.copyOfSong()) {
+                System.out.println("La canzone esiste già");
+            }
+
             if (album.getTitle().isEmpty()) {
-                System.out.println("Il campo non può essere vuoto");
+                System.out.println(VOID_INPUT);
                 album.setTitle("");
             }
             if (album.getAuthor().isEmpty()) {
-                System.out.println("Il campo non può essere vuoto");
+                System.out.println(VOID_INPUT);
                 album.setAuthor("");
             }
         }
@@ -61,9 +71,11 @@ public class Library {
     public void findAlbum(String toShow) {
         for (int i = 0; i < albumList.size(); i++) {
             if (albumList.get(i).getTitle().equalsIgnoreCase(toShow)) {
-                System.out.printf("%s - %s\n", albumList.get(i).getAuthor().toString(), albumList.get(i).getTitle().toString());
+                System.out.printf("Artista: %s\nTitolo: %s\nTracce:\n", albumList.get(i).getAuthor(), albumList.get(i).getTitle());
+                albumList.get(i).songDescription();
+                //System.out.print(", ");
             }
-            System.out.println();
+            System.out.printf("L'album non è presente in archivio\n");
         }
 
         //    if (albumList.contains(toShow)) {
@@ -92,7 +104,7 @@ public class Library {
 
     public void randomAlbum() {
         Album random = albumList.get(MyMath.randomInt(0, albumList.size()));
-        System.out.println(random.randomSong().toString());
+        System.out.println(random.randomSong());
     }
 
     /**

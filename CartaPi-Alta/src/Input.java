@@ -38,9 +38,8 @@ public static void creaPartita() {
                             System.out.println("Complimenti, hai vinto");
                             giocatore.gestioneDenaro(mazzo.confrontaCarte(), scommessa);
                         }
-                }else{
-                System.out.println("Le carte estratte sono uguali :(");
                 }
+                System.out.println("Le carte estratte sono uguali :(");
                 break;
             case 2:
                 break;

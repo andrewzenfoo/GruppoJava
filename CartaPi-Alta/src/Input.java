@@ -1,8 +1,4 @@
-import javax.sound.midi.SysexMessage;
 
-/**
- * Created by andrew on 5/16/16.
- */
 public class Input {
 
 public static void creaPartita() {

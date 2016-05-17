@@ -5,6 +5,7 @@ import javax.sound.midi.SysexMessage;
  */
 public class Input {
 
+public static void creaPartita() {
     Giocatore giocatore = new Giocatore("", 0);
 
     do {
@@ -33,18 +34,19 @@ public class Input {
                     System.out.print("Scegli quanto scommettere: ");
                     int scommessa = IO.inputInt();
                     giocatore.scommetti(scommessa);
-                    if (mazzo.confrontaCarte()) {
-                        System.out.println("Complimenti, hai vinto");
-                        giocatore.gestioneDenaro(mazzo.confrontaCarte(), scommessa);
-                    }
-                }
+                        if (mazzo.confrontaCarte()) {
+                            System.out.println("Complimenti, hai vinto");
+                            giocatore.gestioneDenaro(mazzo.confrontaCarte(), scommessa);
+                        }
+                }else{
                 System.out.println("Le carte estratte sono uguali :(");
+                }
                 break;
             case 2:
                 break;
         }
     }
-    while (
-
+    while (giocatore.getSoldi!=0)
+}
 
 }

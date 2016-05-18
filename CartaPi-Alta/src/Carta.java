@@ -9,7 +9,7 @@ public class Carta {
     private String nome;
 
     public Carta(int[] valore, String[] nome) {
-        int rand = MyMath.randomInt(MIN_CARTA, MAX_CARTA);
+        int rand = MyMath.randomInt(MIN_CARTA, MAX_CARTA-1);
         this.valore = valore[rand];
         this.nome = nome[rand];
     }

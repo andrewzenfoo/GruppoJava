@@ -41,4 +41,12 @@ public class Giocatore {
             setSoldi(this.soldi =+ soldi*2);
         }
     }
+
+    public boolean scommessaValida(int importoScommesso) {
+        if (importoScommesso <= this.soldi) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

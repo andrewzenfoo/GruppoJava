@@ -13,11 +13,11 @@ public class Mazzo {
     Carta carta1 = new Carta(VALORE, NOME_FRA);
     Carta carta2 = new Carta(VALORE, NOME_FRA);
 
-    public Mazzo() {
+  /*  public Mazzo() {
         this.carta1 = carta1;
         this.carta2 = carta2;
     }
-
+*/
     /////////////////////////////////METODI/////////////////////////////////////
 
     public boolean carteUguali() {

@@ -3,155 +3,96 @@ import java.util.Vector;
 /**
  * Created by andrew on 5/10/16.
  */
-public class Input {
+public class Nation implements Comparable<Nation> {
 
-    private static final String TERMINAZIONE = "Per terminare l'inserimento lasciare vuoto il campo";
-    private static final String ERRORE_NAZIONE = "La nazione inserita non partecipa all'olimpiade";
+    private String name;
+    private int oro;
+    private int argento;
+    private int bronzo;
 
-    public static void input() {
+    //private Vector<Nation> nationVector = new Vector<>();
 
-        int choice;
-        Vector<Nation> nationVector = new Vector<>();
-        Vector<Competition> competitionVector = new Vector<>();
-        Results medagliere = new Results();
+    public Nation(String name) {
+        this.name = name;
+        this.oro = 0;
+        this.argento = 0;
+        this.bronzo = 0;
+    }
 
-        do {
-            System.out.println("Benvenuto!");
-            System.out.println("Scegliere cosa fare:");
-            System.out.println("1) Inserire una nuova nazione");
-            System.out.println("2) Aggiungere una nuova gara");
-            System.out.println("3) Visualizzare il medagliere");
-            System.out.println("4) Esci");
+    public int compareTo(Nation that) {
+        return 0;
+    }
 
-            choice = IO.inputInt();
+    public String getName() {
+        return name;
+    }
 
-            switch (choice) {
-                case 1:
-                    String nationName;
-                    System.out.println(TERMINAZIONE);
-                    do {
-                        nationName = IO.input();
-                        if (!nationName.isEmpty()) {
-                            Nation nation = new Nation(nationName);
-                            nationVector.add(nation);
-                        }
-                    }
-                    while (!nationName.isEmpty());
-                    break;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-                case 2:
-                    String competitionName;
-                    System.out.println(TERMINAZIONE);
-                    do {
-                        competitionName = IO.input();
-                        if (!competitionName.isEmpty()) {
-                            Competition competition = new Competition(competitionName);
-                            competitionVector.add(competition);
-                            System.out.println("Inserire le nazioni in ordine di arrivo sul podio (campo vuoto per terminare):");
+    public int getOro() {
+        return oro;
+    }
 
-                            String primo;
-                            String secondo;
-                            String terzo;
+    public void setOro() {
+        this.oro = this.oro +1;
+    }
 
-                            int i;
+    public int getArgento() {
+        return argento;
+    }
 
-                            do {
-                                System.out.print("Primo posto: ");
-                                primo = IO.input();
-                                boolean nonpresente = false;
-                                for (i = 0; i < nationVector.size(); i++) {
-                                    if (!nationVector.get(i).nationInList(primo, nationVector)) {
-                                        nonpresente = true;
-                                    }
-                                }
-                                if (nonpresente){
-                                	System.out.println(ERRORE_NAZIONE);
-                                }
-                            }
-                            while (!nationVector.get(i-1).nationInList(primo, nationVector));
+    public void setArgento() {
+        this.argento = this.argento +1;
+    }
 
-                            do {
-                                System.out.print("Secondo posto: ");
-                                secondo = IO.input();
-                                boolean nonpresente = false;
-                                for (i = 0; i < nationVector.size(); i++) {
-                                    if (!nationVector.get(i).nationInList(secondo, nationVector)) {
-                                        nonpresente = true;
-                                    }
-                                }
-                                if (nonpresente){
-                                	System.out.println(ERRORE_NAZIONE);
-                                }
-                            }
-                            while (!nationVector.get(i-1).nationInList(secondo, nationVector));
+    public int getBronzo() {
+        return bronzo;
+    }
 
-                            do {
-                                System.out.print("Terzo posto: ");
-                                terzo = IO.input();
-                                boolean nonpresente = false;
-                                for (i = 0; i < nationVector.size(); i++) {
-                                    if (!nationVector.get(i).nationInList(terzo, nationVector)) {
-                                        nonpresente = true;
-                                    }
-                                }
-                                if (nonpresente){
-                                	System.out.println(ERRORE_NAZIONE);
-                                }
-                            }
-                            while (!nationVector.get(i-1).nationInList(terzo, nationVector));
+    public void setBronzo() {
+        this.bronzo = this.bronzo + 1;
+    }
 
-                            String[] list = {primo, secondo, terzo};
+    /////////////////////////////////////////METODI/////////////////////////////////////////////////////////////
 
-                            Nation[] nationList = new Nation[3];
-
-                            for (i=0; i<list.length; i++) {
-                                //competition.setPodium(nationVector.get(i).returnNation(list[i], nationVector));
-                                Nation x = nationVector.get(i).returnNation(list[i], nationVector);
-                                //Nation[] nationList = new Nation[3];
-                                nationList[i] = x;
-                            }
-
-                            competition.setPodium(nationList[0], nationList[1], nationList[2]);
-
-                            /*if (!primo.isEmpty() && !secondo.isEmpty() && !terzo.isEmpty()) {
-                                for (int i = 0; i < list.length; i++) {
-                                    for (int j = 0; j < nationVector.size(); j++) {
-                                        if (nationVector.get(j).nationInList(list[i], nationVector)) {
-                                            competition.setPodium(nationVector.get(i).returnNation(list[i], nationVector));
-                                        }
-                                        else {
-                                            System.out.println("La nazione inserita non partecipa all'olimpiade");
-                                        }
-                                    }
-                                }
-                                */
-                        }
-                    }
-                    while (!competitionName.isEmpty());
-                    //}
-                    //while (!competitionName.isEmpty());
-                    break;
-
-                case 3:
-                	if (!nationVector.isEmpty()) {
-                		Results results = new Results();
-                		results.sortVector(nationVector); //copiare le nazioni al contrario in un altro vettore
-                		for (int i = 0; i < nationVector.size(); i++) {
-                			System.out.printf("%d) %s\n\tOri: %d\n\tArgenti: %d\n\tBronzi: %d\n", i + 1, nationVector.get(i).getName(), nationVector.get(i).getOro(), nationVector.get(i).getArgento(), nationVector.get(i).getBronzo());
-                		}
-                	}else{
-                		System.out.printf("Nessuna nazione disponibile!\n");
-                    }
-                    break;
-
-                case 4:
-                    break;
-
-                default:
-                    System.out.println("Inserire un'opzione valida");
-                    break;
+    public boolean alreadyExists(Vector<Nation> nationVector) {
+        Nation lastNation = nationVector.lastElement();
+        for (int i = 0; i < nationVector.size(); i++) {
+            if (lastNation.getName().equalsIgnoreCase(nationVector.get(i).getName())) {
+                return true;
             }
         }
-        while (choice != 4);
+        return false;
     }
+
+    public Nation returnNation(String x, Vector<Nation> nationVector) {
+        Nation nation = new Nation("");
+        for (int i = 0; i < nationVector.size(); i++) {
+            if (x.equalsIgnoreCase(nationVector.get(i).getName())) {
+                nation = nationVector.get(i);
+            }
+        }
+        return nation;
+    }
+
+   public boolean nationInList(String x, Vector<Nation> nationVector) {
+       for (int i = 0; i < nationVector.size(); i++) {
+           if (x.equalsIgnoreCase(nationVector.get(i).getName())) {
+               return true;
+           }
+       }
+       return false;
+   }
+
+
+
+
+
+
+
+
+
 }
+

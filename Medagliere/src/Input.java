@@ -58,10 +58,14 @@ public class Input {
                             do {
                                 System.out.print("Primo posto: ");
                                 primo = IO.input();
+                                boolean nonpresente = false;
                                 for (i = 0; i < nationVector.size(); i++) {
                                     if (!nationVector.get(i).nationInList(primo, nationVector)) {
-                                        System.out.println(ERRORE_NAZIONE);
+                                        nonpresente = true;
                                     }
+                                }
+                                if (nonpresente){
+                                	System.out.println(ERRORE_NAZIONE);
                                 }
                             }
                             while (!nationVector.get(i-1).nationInList(primo, nationVector));
@@ -69,10 +73,14 @@ public class Input {
                             do {
                                 System.out.print("Secondo posto: ");
                                 secondo = IO.input();
+                                boolean nonpresente = false;
                                 for (i = 0; i < nationVector.size(); i++) {
                                     if (!nationVector.get(i).nationInList(secondo, nationVector)) {
-                                        System.out.println(ERRORE_NAZIONE);
+                                        nonpresente = true;
                                     }
+                                }
+                                if (nonpresente){
+                                	System.out.println(ERRORE_NAZIONE);
                                 }
                             }
                             while (!nationVector.get(i-1).nationInList(secondo, nationVector));
@@ -80,10 +88,14 @@ public class Input {
                             do {
                                 System.out.print("Terzo posto: ");
                                 terzo = IO.input();
+                                boolean nonpresente = false;
                                 for (i = 0; i < nationVector.size(); i++) {
                                     if (!nationVector.get(i).nationInList(terzo, nationVector)) {
-                                        System.out.println(ERRORE_NAZIONE);
+                                        nonpresente = true;
                                     }
+                                }
+                                if (nonpresente){
+                                	System.out.println(ERRORE_NAZIONE);
                                 }
                             }
                             while (!nationVector.get(i-1).nationInList(terzo, nationVector));
@@ -121,10 +133,14 @@ public class Input {
                     break;
 
                 case 3:
-                    Results results = new Results();
-                    results.sortVector(nationVector); //copiare le nazioni al contrario in un altro vettore
-                    for (int i = 0; i < nationVector.size(); i++) {
-                        System.out.printf("%d) %s\n\tOri: %d\n\tArgenti: %d\n\tBronzi: %d\n", i + 1, nationVector.get(i).getName(), nationVector.get(i).getOro(), nationVector.get(i).getArgento(), nationVector.get(i).getBronzo());
+                	if (!nationVector.isEmpty()) {
+                		Results results = new Results();
+                		results.sortVector(nationVector); //copiare le nazioni al contrario in un altro vettore
+                		for (int i = 0; i < nationVector.size(); i++) {
+                			System.out.printf("%d) %s\n\tOri: %d\n\tArgenti: %d\n\tBronzi: %d\n", i + 1, nationVector.get(i).getName(), nationVector.get(i).getOro(), nationVector.get(i).getArgento(), nationVector.get(i).getBronzo());
+                		}
+                	}else{
+                		System.out.printf("Nessuna nazione disponibile!\n");
                     }
                     break;
 

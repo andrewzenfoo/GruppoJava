@@ -6,6 +6,7 @@ import java.util.Vector;
 public class Input {
 
     private static final String TERMINAZIONE = "Per terminare l'inserimento lasciare vuoto il campo";
+    private static final String ERRORE_NAZIONE = "La nazione inserita non partecipa all'olimpiade";
 
     public static void input() {
 
@@ -52,30 +53,76 @@ public class Input {
                             String secondo;
                             String terzo;
 
-                            System.out.print("Primo posto: ");
-                            primo = IO.input();
-                            System.out.print("Secondo posto: ");
-                            secondo = IO.input();
-                            System.out.print("Terzo posto: ");
-                            terzo = IO.input();
+                            int i;
 
-                            String[] list = {primo, secondo, terzo};
-
-                            if (!primo.isEmpty() && !secondo.isEmpty() && !terzo.isEmpty()) {
-                                for (int i = 0; i < list.length; i++) {
-                                    for (int j = 0; j < nationVector.size(); j++) {
-                                        if (nationVector.get(j).nationInList(list[i])) {
-                                            competition.setPodium(nationVector.get(i).returnNation(list[i]));
-                                        }
+                            do {
+                                System.out.print("Primo posto: ");
+                                primo = IO.input();
+                                for (i = 0; i < nationVector.size(); i++) {
+                                    if (!nationVector.get(i).nationInList(primo, nationVector)) {
+                                        System.out.println(ERRORE_NAZIONE);
                                     }
                                 }
                             }
+                            while (!nationVector.get(i-1).nationInList(primo, nationVector));
+
+                            do {
+                                System.out.print("Secondo posto: ");
+                                secondo = IO.input();
+                                for (i = 0; i < nationVector.size(); i++) {
+                                    if (!nationVector.get(i).nationInList(secondo, nationVector)) {
+                                        System.out.println(ERRORE_NAZIONE);
+                                    }
+                                }
+                            }
+                            while (!nationVector.get(i-1).nationInList(secondo, nationVector));
+
+                            do {
+                                System.out.print("Terzo posto: ");
+                                terzo = IO.input();
+                                for (i = 0; i < nationVector.size(); i++) {
+                                    if (!nationVector.get(i).nationInList(terzo, nationVector)) {
+                                        System.out.println(ERRORE_NAZIONE);
+                                    }
+                                }
+                            }
+                            while (!nationVector.get(i-1).nationInList(terzo, nationVector));
+
+                            String[] list = {primo, secondo, terzo};
+
+                            Nation[] nationList = new Nation[3];
+
+                            for (i=0; i<list.length; i++) {
+                                //competition.setPodium(nationVector.get(i).returnNation(list[i], nationVector));
+                                Nation x = nationVector.get(i).returnNation(list[i], nationVector);
+                                //Nation[] nationList = new Nation[3];
+                                nationList[i] = x;
+                            }
+
+                            competition.setPodium(nationList[0], nationList[1], nationList[2]);
+
+                            /*if (!primo.isEmpty() && !secondo.isEmpty() && !terzo.isEmpty()) {
+                                for (int i = 0; i < list.length; i++) {
+                                    for (int j = 0; j < nationVector.size(); j++) {
+                                        if (nationVector.get(j).nationInList(list[i], nationVector)) {
+                                            competition.setPodium(nationVector.get(i).returnNation(list[i], nationVector));
+                                        }
+                                        else {
+                                            System.out.println("La nazione inserita non partecipa all'olimpiade");
+                                        }
+                                    }
+                                }
+                                */
                         }
                     }
                     while (!competitionName.isEmpty());
+                    //}
+                    //while (!competitionName.isEmpty());
                     break;
 
                 case 3:
+                    Results results = new Results();
+                    results.sortVector(nationVector); //copiare le nazioni al contrario in un altro vettore
                     for (int i = 0; i < nationVector.size(); i++) {
                         System.out.printf("%d) %s\n\tOri: %d\n\tArgenti: %d\n\tBronzi: %d\n", i + 1, nationVector.get(i).getName(), nationVector.get(i).getOro(), nationVector.get(i).getArgento(), nationVector.get(i).getBronzo());
                     }

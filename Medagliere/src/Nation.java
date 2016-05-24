@@ -3,20 +3,24 @@ import java.util.Vector;
 /**
  * Created by andrew on 5/10/16.
  */
-public class Nation {
+public class Nation implements Comparable<Nation> {
 
     private String name;
     private int oro;
     private int argento;
     private int bronzo;
 
-    private Vector<Nation> nationVector = new Vector<>();
+    //private Vector<Nation> nationVector = new Vector<>();
 
     public Nation(String name) {
         this.name = name;
         this.oro = 0;
         this.argento = 0;
         this.bronzo = 0;
+    }
+
+    public int compareTo(Nation that) {
+        return 0;
     }
 
     public String getName() {
@@ -51,17 +55,9 @@ public class Nation {
         this.bronzo = this.bronzo + 1;
     }
 
-    public Vector<Nation> getNationVector() {
-        return nationVector;
-    }
-
-    public void setNationVector(Vector<Nation> nationVector) {
-        this.nationVector = nationVector;
-    }
-
     /////////////////////////////////////////METODI/////////////////////////////////////////////////////////////
 
-    public boolean alreadyExists() {
+    public boolean alreadyExists(Vector<Nation> nationVector) {
         Nation lastNation = nationVector.lastElement();
         for (int i = 0; i < nationVector.size(); i++) {
             if (lastNation.getName().equalsIgnoreCase(nationVector.get(i).getName())) {
@@ -71,7 +67,7 @@ public class Nation {
         return false;
     }
 
-    public Nation returnNation(String x) {
+    public Nation returnNation(String x, Vector<Nation> nationVector) {
         Nation nation = new Nation("");
         for (int i = 0; i < nationVector.size(); i++) {
             if (x.equalsIgnoreCase(nationVector.get(i).getName())) {
@@ -81,7 +77,7 @@ public class Nation {
         return nation;
     }
 
-   public boolean nationInList(String x) {
+   public boolean nationInList(String x, Vector<Nation> nationVector) {
        for (int i = 0; i < nationVector.size(); i++) {
            if (x.equalsIgnoreCase(nationVector.get(i).getName())) {
                return true;

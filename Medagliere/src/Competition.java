@@ -16,10 +16,15 @@ public class Competition {
     ////////////////////////////////METODI///////////////////////////////////////////////////////////
 
 
-    public void setPodium(Nation nation) {
-        for (int i=0; i<podium.length; i++) {
+    public void setPodium(Nation nation1, Nation nation2, Nation nation3) {
+        /*for (int i=0; i<podium.length; i++) {
             podium[i] = nation;
         }
+        */
+        podium[0] = nation1;
+        podium[1] = nation2;
+        podium[2] = nation3;
+
         podium[0].setOro();
         podium[1].setArgento();
         podium[2].setBronzo();

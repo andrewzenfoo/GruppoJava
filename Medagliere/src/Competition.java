@@ -1,8 +1,5 @@
 import java.util.Vector;
 
-/**
- * Created by andrew on 5/10/16.
- */
 public class Competition {
 
     private String name;
@@ -11,6 +8,10 @@ public class Competition {
     public Competition(String name) {
         this.name = name;
         podium = new Nation[3];
+    }
+
+    public String getName() {
+        return name;
     }
 
     ////////////////////////////////METODI///////////////////////////////////////////////////////////
@@ -28,6 +29,15 @@ public class Competition {
         podium[0].setOro();
         podium[1].setArgento();
         podium[2].setBronzo();
+    }
+
+    public boolean competitionInList(String competitionName, Vector<Competition> competitionVector) {
+        for (int i = 0; i < competitionVector.size(); i++) {
+            if (competitionName.equalsIgnoreCase(competitionVector.get(i).getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

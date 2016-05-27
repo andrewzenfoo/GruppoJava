@@ -26,6 +26,7 @@ public class Input {
                 case 1:
                     String nationName;
                     System.out.println(TERMINAZIONE);
+                    System.out.println("Inserire almeno 3 nazioni");
                     do {
                         nationName = IO.input();
                         if (!nationName.isEmpty()) {
@@ -33,7 +34,7 @@ public class Input {
                             nationVector.add(nation);
                         }
                     }
-                    while (!nationName.isEmpty());
+                    while (!nationName.isEmpty() || nationVector.size()<3);
                     break;
 
                 case 2:
@@ -58,6 +59,7 @@ public class Input {
                             String primo;
                             String secondo;
                             String terzo;
+                            String[] coso;
 
                             do {
                                 System.out.print("Primo posto: ");

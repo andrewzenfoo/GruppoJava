@@ -1,3 +1,6 @@
+package it.ing.unibs.MedagliereOlimpico;
+
+
 import static org.junit.Assert.*;
 
 import java.util.Vector;

@@ -1,3 +1,5 @@
+package it.ing.unibs.MedagliereOlimpico;
+
 /**
  * Created by andrew on 5/10/16.
  */

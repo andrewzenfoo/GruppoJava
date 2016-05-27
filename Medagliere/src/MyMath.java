@@ -1,3 +1,6 @@
+package it.ing.unibs.MedagliereOlimpico;
+
+
 import java.util.Random;
 
 public class MyMath {

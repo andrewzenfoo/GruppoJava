@@ -174,8 +174,6 @@ public class Utente {
             lettera++;
         if (Character.isLetter(codiceFiscale.charAt(3)))
             lettera++;
-        if (Character.isLetter(codiceFiscale.charAt(1)))
-            lettera++;
         if (Character.isLetter(codiceFiscale.charAt(4)))
             lettera++;
         if (Character.isLetter(codiceFiscale.charAt(5)))

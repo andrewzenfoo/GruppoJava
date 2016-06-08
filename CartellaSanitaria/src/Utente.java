@@ -5,7 +5,7 @@ public class Utente {
     private String nome;
     private String cognome;
     private String indirizzo;
-    private char[] numeroTelefono = new char[10];
+    private String numeroTelefono;
     private String email;
     private int dataNascita; //Probabile problema
     private String città;
@@ -18,7 +18,7 @@ public class Utente {
 
     //////////////////COSTRUTTORI///////////////////////////
 
-    public Utente(String nome, String cognome, String indirizzo, char[] numeroTelefono,
+    public Utente(String nome, String cognome, String indirizzo, String numeroTelefono,
                   String email, int dataNascita, String città, char sesso, String[] gruppoSanguigno,
                   String codiceFiscale) {
         this.nome = nome;
@@ -33,7 +33,7 @@ public class Utente {
         this.codiceFiscale = codiceFiscale;
     }
 
-    public Utente(String nome, String cognome, String indirizzo, char numeroTelefono,
+    public Utente(String nome, String cognome, String indirizzo, String numeroTelefono,
                   int dataNascita, String città, char sesso, String codiceFiscale,
                   String[] gruppoSanguigno) {
         this.nome = nome;
@@ -82,11 +82,11 @@ public class Utente {
         this.indirizzo = indirizzo;
     }
 
-    public char[] getNumeroTelefono() {
+    public String getNumeroTelefono() {
         return numeroTelefono;
     }
 
-    public void setNumeroTelefono(char[] numeroTelefono) {
+    public void setNumeroTelefono(String numeroTelefono) {
         this.numeroTelefono = numeroTelefono;
     }
 
@@ -156,9 +156,9 @@ public class Utente {
         this.codiceSanitario[4] = this.città.charAt(0);
         this.codiceSanitario[5] = this.città.charAt(1);
         this.codiceSanitario[6] = this.città.charAt(2);
-        this.codiceSanitario[7]; //Da completare con numero random
-        this.codiceSanitario[8]; //Da completare con numero random
-        this.codiceSanitario[9]; //Da completare con numero random
+        this.codiceSanitario[7] = (char) MyLib.randomInt(0, 9);
+        this.codiceSanitario[8] = (char) MyLib.randomInt(0, 9);
+        this.codiceSanitario[9] = (char) MyLib.randomInt(0, 9);
     }
 
     private boolean controlloCodiceFiscale() {
@@ -221,6 +221,69 @@ public class Utente {
         }
         return false;
     }
+
+    public boolean numeroTelefono() {
+
+        int contatore = 0;
+
+        if (this.numeroTelefono.length() != 10) {
+            return false;
+        } else {
+            for (int i = 0; i < this.numeroTelefono.length(); i++) {
+                if (Character.isDigit(this.numeroTelefono.charAt(i))) {
+                    contatore++;
+                } else {
+                    return false;
+                }
+            }
+            if (contatore == 10)
+                return true;
+        }
+    }
+
+    public boolean controlloEmail() {
+
+        int contatore = 0;
+        int posizioneChiocciola = 0;
+        int posizionePunto = 0;
+
+        for (int i = 0; i < this.email.length(); i++) {
+            if (this.email.charAt(i) == '@') {
+                if (i > 1) {
+                    contatore++;
+                }
+                posizioneChiocciola = i;
+            }
+            if (contatore != 1) {
+                return false;
+            }
+        }
+
+        for (int i = this.email.length(); i >= 0; i--) {
+            if (this.email.charAt(i) == '.') {
+                if (this.email.length() - posizioneChiocciola != 2 || this.email.length() - posizioneChiocciola != 3) {
+                    return false;
+                }
+                posizionePunto = i;
+            }
+        }
+
+        String subString = this.email.substring(posizioneChiocciola + 1, posizionePunto);
+
+        for (int i = 0; i < subString.length(); i++) {
+            Character carattere = subString.charAt(i);
+            if (!carattere.isLetterOrDigit(i)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+
+
+
 
 }
 

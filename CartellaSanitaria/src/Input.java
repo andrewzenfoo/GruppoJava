@@ -1,15 +1,20 @@
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Input {
 
     public static final String CAMPO_VUOTO = "Non è possibile lasciare il campo vuoto";
     public static final String ANOMALIA_LETTERE = "Inserire solo lettere";
     public static final String ANOMALIA_NUMERI = "Inserire solo numeri";
+    public static final String ERRORE_EMAIL = "Inserire un indirizzo email valido";
+    public static final String ERRORE_DATA = "Inserire un valore plausibile";
 
     public void input() {
 
         String[] gruppoSanguigno = {"", ""};
+        GregorianCalendar dataDiNascita;
 
-        Utente paziente = new Utente("", "", "", "", "", 0, "", Character.MIN_VALUE, gruppoSanguigno, "");
+        Utente paziente = new Utente("", "", "", "", "", dataDiNascita, "", Character.MIN_VALUE, gruppoSanguigno, "");
         System.out.println("SOFTWARE PER LA GESTIONE DELLA CARTELLA CLINICA");
         System.out.println("Inserire i dati del paziente");
 
@@ -69,8 +74,91 @@ public class Input {
         }
         while (paziente.getNumeroTelefono().isEmpty() || !paziente.numeroTelefono());
 
+        System.out.print("Indirizzo email (facoltativa): ");
+        do {
+            paziente.setEmail(MyLib.input());
+            if (paziente.getEmail().isEmpty()) {
+                break;
+            }
 
-    }
+            if (!paziente.controlloEmail()) {
+                System.out.println(ERRORE_EMAIL);
+                paziente.setEmail("");
+            }
+        }
+        while (!paziente.controlloEmail());
+
+        System.out.println("Data di nascita");
+        Integer anno;
+        Integer mese;
+        Integer giorno;
+
+        System.out.printf("\tAnno: ");
+        do {
+            anno = MyLib.inputInt();
+            if (anno.toString().isEmpty()) {
+                System.out.println(CAMPO_VUOTO);
+                anno = null;
+            }
+            if (anno<1900) {
+                System.out.println("Inserire un valore plausibile (minimo 1900)");
+                anno = null;
+            }
+        }
+        while (anno<1900 || anno.toString().isEmpty());
+
+        System.out.printf("\tMese: ");
+        do {
+            mese = MyLib.inputInt();
+            if (mese.toString().isEmpty()) {
+                System.out.println(CAMPO_VUOTO);
+                mese = null;
+            }
+            if (mese > 12 || mese < 1) {
+                System.out.println("Inserire un valore plausibile");
+                mese = null;
+            }
+        }
+        while (mese.toString().isEmpty() || (mese > 12 && mese < 1));
+
+        System.out.printf("\tGiorno: ");
+        do {
+            giorno = MyLib.inputInt();
+            if (giorno.toString().isEmpty()) {
+                System.out.println(CAMPO_VUOTO);
+                giorno = null;
+            }
+            if (mese == 2 && giorno > 29 && MyLib.bisestile(anno)) {
+                System.out.println("Febbraio non può avere più di 29 giorni");
+                giorno = null;
+            }
+            else if (mese == 2 && giorno > 28 && !MyLib.bisestile(anno)) {
+                System.out.println("L'anno non è bisestile e Febbraio non può avere più di 28 giorni");
+                giorno = null;
+            }
+            if ((mese == 1 || mese == 3 || mese == 5 || mese == 7 || mese == 8 || mese == 10 || mese == 12) && giorno > 31) {
+                System.out.println("Il mese immesso non può avere più di 31 giorni");
+                giorno = null;
+            }
+            if (giorno < 1 || giorno > 31) {
+                System.out.println("Inserire un valore plausibile");
+                giorno = null;
+            }
+        }
+        while (giorno.toString().isEmpty() || mese == 2 && giorno > 28 || (giorno < 1 || giorno > 31) ||
+                (mese == 2 && giorno > 28 && !MyLib.bisestile(anno)) || (mese == 2 && giorno > 29 && MyLib.bisestile(anno)));
+
+        dataDiNascita = new GregorianCalendar(anno, mese-1, giorno);
+
+        paziente.setDataDiNascita(dataDiNascita);
+
+
+        }
+
+
+
+        }
+
 
 
 

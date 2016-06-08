@@ -120,38 +120,48 @@ import java.util.Random;
 	        return rand;
 	    }
 
-		public boolean controlloEmail() {
+		public boolean controlloEmail(String email) 
+		{
 
 	        int contatore = 0;
 	        int posizioneChiocciola = 0;
 	        int posizionePunto = 0;
 
-	        for (int i = 0; i < this.email.length(); i++) {
-	            if (this.email.charAt(i) == '@') {
-	                if (i > 1) {
+	        for (int i = 0; i < email.length(); i++) 
+	        {
+	            if (email.charAt(i) == '@') 
+	            {
+	                if (i > 1) 
+	                {
 	                    contatore++;
 	                }
 	                posizioneChiocciola = i;
 	            }
-	            if (contatore != 1) {
+	            if (contatore != 1) 
+	            {
 	                return false;
 	            }
 	        }
 
-	        for (int i = this.email.length(); i >= 0; i--) {
-	            if (this.email.charAt(i) == '.') {
-	                if (this.email.length() - posizioneChiocciola != 2 || this.email.length() - posizioneChiocciola != 3) {
+	        for (int i = email.length(); i >= 0; i--) 
+	        {
+	            if (email.charAt(i) == '.') 
+	            {
+	                if (email.length() - posizioneChiocciola != 2 || email.length() - posizioneChiocciola != 3) 
+	                {
 	                    return false;
 	                }
 	                posizionePunto = i;
 	            }
 	        }
 
-	        String subString = this.email.substring(posizioneChiocciola + 1, posizionePunto);
+	        String subString = email.substring(posizioneChiocciola + 1, posizionePunto);
 
-	        for (int i = 0; i < subString.length(); i++) {
+	        for (int i = 0; i < subString.length(); i++) 
+	        {
 	            Character carattere = subString.charAt(i);
-	            if (!carattere.isLetterOrDigit(i)) {
+	            if (!carattere.isLetterOrDigit(i)) 
+	            {
 	                return false;
 	            }
 	        }

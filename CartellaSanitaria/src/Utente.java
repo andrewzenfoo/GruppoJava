@@ -5,9 +5,9 @@ public class Utente {
     private String nome;
     private String cognome;
     private String indirizzo;
-    private String[] numeroTelefono = new String[10];
+    private char[] numeroTelefono = new char[10];
     private String email;
-    private int dataNascita;
+    private int dataNascita; //Probabile problema
     private String città;
     private char sesso;
     private String codiceFiscale;
@@ -18,7 +18,7 @@ public class Utente {
 
     //////////////////COSTRUTTORI///////////////////////////
 
-    public Utente(String nome, String cognome, String indirizzo, String[] numeroTelefono,
+    public Utente(String nome, String cognome, String indirizzo, char[] numeroTelefono,
                   String email, int dataNascita, String città, char sesso, String[] gruppoSanguigno,
                   String codiceFiscale) {
         this.nome = nome;
@@ -33,7 +33,7 @@ public class Utente {
         this.codiceFiscale = codiceFiscale;
     }
 
-    public Utente(String nome, String cognome, String indirizzo, String[] numeroTelefono,
+    public Utente(String nome, String cognome, String indirizzo, char numeroTelefono,
                   int dataNascita, String città, char sesso, String codiceFiscale,
                   String[] gruppoSanguigno) {
         this.nome = nome;
@@ -82,11 +82,11 @@ public class Utente {
         this.indirizzo = indirizzo;
     }
 
-    public String[] getNumeroTelefono() {
+    public char[] getNumeroTelefono() {
         return numeroTelefono;
     }
 
-    public void setNumeroTelefono(String[] numeroTelefono) {
+    public void setNumeroTelefono(char[] numeroTelefono) {
         this.numeroTelefono = numeroTelefono;
     }
 
@@ -203,5 +203,24 @@ public class Utente {
         }
         return false;
     }
+
+    public boolean anomaliaNome() {
+        for (int i = 0; i < this.nome.length(); i++) {
+            if (!Character.isLetter(nome.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean anomaliaCognome() {
+        for (int i = 0; i < this.cognome.length(); i++) {
+            if (!Character.isLetter(cognome.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
 

@@ -1,3 +1,4 @@
+import java.util.GregorianCalendar;
 import java.util.Vector;
 
 public class Utente {
@@ -7,9 +8,10 @@ public class Utente {
     private String indirizzo;
     private String numeroTelefono;
     private String email;
-    private int dataNascita; //Probabile problema
+    //private int[] dataNascita = new int[3]; //Probabile problema
+    GregorianCalendar dataDiNascita = new GregorianCalendar(0,0,0);
     private String città;
-    private char sesso;
+    private String sesso;
     private String codiceFiscale;
     private char[] codiceSanitario = new char[10];
     private String[] gruppoSanguigno = new String[2];
@@ -19,14 +21,15 @@ public class Utente {
     //////////////////COSTRUTTORI///////////////////////////
 
     public Utente(String nome, String cognome, String indirizzo, String numeroTelefono,
-                  String email, int dataNascita, String città, char sesso, String[] gruppoSanguigno,
+                  String email, GregorianCalendar dataDiNascita, String città, String sesso, String[] gruppoSanguigno,
                   String codiceFiscale) {
         this.nome = nome;
         this.cognome = cognome;
         this.indirizzo = indirizzo;
         this.numeroTelefono = numeroTelefono;
         this.email = email;
-        this.dataNascita = dataNascita;
+        this.dataDiNascita = dataDiNascita;
+        //this.dataNascita = dataNascita;
         this.città = città;
         this.sesso = sesso;
         this.gruppoSanguigno = gruppoSanguigno;
@@ -34,13 +37,14 @@ public class Utente {
     }
 
     public Utente(String nome, String cognome, String indirizzo, String numeroTelefono,
-                  int dataNascita, String città, char sesso, String codiceFiscale,
+                  GregorianCalendar dataDiNascita, String città, String sesso, String codiceFiscale,
                   String[] gruppoSanguigno) {
         this.nome = nome;
         this.cognome = cognome;
         this.indirizzo = indirizzo;
         this.numeroTelefono = numeroTelefono;
-        this.dataNascita = dataNascita;
+        this.dataDiNascita = dataDiNascita;
+        //this.dataNascita = dataNascita;
         this.città = città;
         this.sesso = sesso;
         this.codiceFiscale = codiceFiscale;
@@ -114,11 +118,11 @@ public class Utente {
         this.codiceFiscale = codiceFiscale;
     }
 
-    public char getSesso() {
+    public String getSesso() {
         return sesso;
     }
 
-    public void setSesso(char sesso) {
+    public void setSesso(String sesso) {
         this.sesso = sesso;
     }
 
@@ -130,14 +134,14 @@ public class Utente {
         this.città = città;
     }
 
-    public int getDataNascita() {
+    /*public int[] getDataNascita() {
         return dataNascita;
     }
 
-    public void setDataNascita(int dataNascita) {
+    public void setDataNascita(int[] dataNascita) {
         this.dataNascita = dataNascita;
     }
-
+*/
     public Vector<Esami> getElencoEsami() {
         return elencoEsami;
     }
@@ -146,9 +150,22 @@ public class Utente {
         this.elencoEsami = elencoEsami;
     }
 
+    public GregorianCalendar getDataDiNascita() {
+        return dataDiNascita;
+    }
+
+    public void setDataDiNascita(GregorianCalendar dataDiNascita) {
+        this.dataDiNascita = dataDiNascita;
+    }
+
     //////////////////////METODI/////////////////////////////////
 
-    private void creaCodiceSanitario() {
+    /**
+     * Questo metodo crea il codice sanitario del paziente
+     * @author Andrea Zanelli
+     * @author Enrico Whurer
+     */
+    public void creaCodiceSanitario() {
         this.codiceSanitario[0] = this.nome.charAt(0);
         this.codiceSanitario[1] = this.nome.charAt(1);
         this.codiceSanitario[2] = this.cognome.charAt(0);
@@ -161,7 +178,13 @@ public class Utente {
         this.codiceSanitario[9] = (char) MyLib.randomInt(0, 9);
     }
 
-    private boolean controlloCodiceFiscale() {
+    /**
+     * Questo metodo controlla che il codice fiscale inserito sia corretto
+     * @author Andrea Zanelli
+     * @author Enrico Whurer
+     * @return true se il codice fiscale è corretto
+     */
+    public boolean controlloCodiceFiscale() {
 
         int lettera = 0;
         int numero = 0;
@@ -201,9 +224,16 @@ public class Utente {
         if (numero == 7 && lettera == 9) {
             return true;
         }
-        return false;
+        else {
+            return false;
+        }
     }
 
+    /**
+     * Questo metodo controlla che il nome non presenti cifre o simboli
+     * @author Andrea Zanelli
+     * @return true se il nome presenta cifre o simboli
+     */
     public boolean anomaliaNome() {
         for (int i = 0; i < this.nome.length(); i++) {
             if (!Character.isLetter(nome.charAt(i))) {
@@ -213,6 +243,11 @@ public class Utente {
         return false;
     }
 
+    /**
+     * Questo metodo controlla che il cognome non presenti cifre o simboli
+     * @author Andrea Zanelli
+     * @return true se il cognome presenta cifre o simboli
+     */
     public boolean anomaliaCognome() {
         for (int i = 0; i < this.cognome.length(); i++) {
             if (!Character.isLetter(cognome.charAt(i))) {
@@ -222,13 +257,20 @@ public class Utente {
         return false;
     }
 
+    /**
+     * Questo metodo controlla che il numero di telefono inserito sia corretto
+     * @author Andrea Zanelli
+     * @author Enrico Whurer
+     * @return true se il numero di telefono è corretto
+     */
     public boolean numeroTelefono() {
 
         int contatore = 0;
 
         if (this.numeroTelefono.length() != 10) {
             return false;
-        } else {
+        }
+        else {
             for (int i = 0; i < this.numeroTelefono.length(); i++) {
                 if (Character.isDigit(this.numeroTelefono.charAt(i))) {
                     contatore++;
@@ -241,6 +283,12 @@ public class Utente {
         }
     }
 
+    /**
+     * Questo metodo controlla che l'indirizzo email inserito sia corretto
+     * @author Andrea Zanelli
+     * @author Enrico Whurer
+     * @return true se l'indirizzo email è corretto
+     */
     public boolean controlloEmail() {
 
         int contatore = 0;
@@ -280,6 +328,33 @@ public class Utente {
         return true;
     }
 
+    /**
+     * Questo metodo controlla che la città sia inserita correttamente
+     * @author Andrea Zanelli
+     * @return true se l'inserimento è incorretto
+     */
+    public boolean anomaliaCitta() {
+        for (int i = 0; i < this.città.length(); i++) {
+            if (!Character.isLetter(città.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Questo metodo controlla che il sesso sia inserito correttamente
+     * @author Andrea Zanelli
+     * @return true se ci sono degli errori
+     */
+    public boolean anomaliaSesso() {
+        for (int i = 0; i < this.sesso.length(); i++) {
+            if (!Character.isLetter(sesso.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 

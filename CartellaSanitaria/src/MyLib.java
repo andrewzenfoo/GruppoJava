@@ -5,6 +5,7 @@ public class MyLib {
 
     /**
      * This method lets you input a string
+     * @author Andrea Zanelli
      * @return string inputed
      */
 
@@ -17,6 +18,7 @@ public class MyLib {
 
     /**
      * This method lets you input an int
+     * @author Andrea Zanelli
      * @return int inputed
      */
 
@@ -29,6 +31,7 @@ public class MyLib {
 
     /**
      * This method lets you input a double
+     * @author Andrea Zanelli
      * @return double inputed
      */
 
@@ -39,12 +42,18 @@ public class MyLib {
         return number;
     }
 
+    /**
+     * This methor prints the parameter
+     * @author Andrea Zanelli
+     * @param o the value to be printed
+     */
     public static void out(Object o) {
         System.out.println(o);
     }
 
     /**
      * This method calculates the maximum number
+     * @author Andrea Zanelli
      * @param num array of integers
      * @return maximum integer
      */
@@ -61,6 +70,7 @@ public class MyLib {
 
     /**
      * This method calculates the average number in an array of doubles
+     * @author Andrea Zanelli
      * @param num array of doubles
      * @return average number
      */
@@ -76,6 +86,7 @@ public class MyLib {
 
     /**
      * This method calculates the average number in an array of ints
+     * @author Andrea Zanelli
      * @param num array of integers
      * @return average number
      */
@@ -91,6 +102,7 @@ public class MyLib {
 
     /**
      * This method computes a random int
+     * @author Andrea Zanelli
      * @param min minimum number (inclusive)
      * @param max maximum number (inclusive)
      * @return random number between min and max parameters
@@ -112,6 +124,12 @@ public class MyLib {
         }
     }
 
+    /**
+     * This method check if a year is a leap year
+     * @author Andrea Zanelli
+     * @param n year
+     * @return true if leap year
+     */
     public static boolean bisestile(int n) {
         if (((n % 4 == 0) && n % 100 != 0) || (n % 400 == 0)) {
             return true;

@@ -1,4 +1,3 @@
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Input {
@@ -12,9 +11,9 @@ public class Input {
     public void input() {
 
         String[] gruppoSanguigno = {"", ""};
-        GregorianCalendar dataDiNascita;
+        GregorianCalendar dataDiNascita = new GregorianCalendar(0,0,0);
 
-        Utente paziente = new Utente("", "", "", "", "", dataDiNascita, "", Character.MIN_VALUE, gruppoSanguigno, "");
+        Utente paziente = new Utente("", "", "", "", "", dataDiNascita, "", "", gruppoSanguigno, "");
         System.out.println("SOFTWARE PER LA GESTIONE DELLA CARTELLA CLINICA");
         System.out.println("Inserire i dati del paziente");
 
@@ -152,12 +151,105 @@ public class Input {
 
         paziente.setDataDiNascita(dataDiNascita);
 
+        System.out.print("Città di residenza: ");
+        do {
+            paziente.setCittà(MyLib.input());
 
+            if (paziente.getCittà().isEmpty()) {
+                System.out.println(CAMPO_VUOTO);
+                paziente.setCittà("");
+            }
+
+            if (paziente.anomaliaCitta()) {
+                System.out.println(ANOMALIA_LETTERE);
+                paziente.setCittà("");
+            }
         }
+        while (paziente.getCittà().isEmpty() || paziente.anomaliaCitta());
 
+        System.out.print("Sesso (m/f): ");
+        do {
+            paziente.setSesso(MyLib.input());
 
+            if (paziente.getSesso().isEmpty()) {
+                System.out.println(CAMPO_VUOTO);
+                paziente.setSesso("");
+            }
 
+            if (paziente.anomaliaSesso()) {
+                System.out.println(ANOMALIA_LETTERE);
+                paziente.setSesso("");
+            }
+
+            if (!paziente.getSesso().equalsIgnoreCase("m") || !paziente.getSesso().equalsIgnoreCase("f")) {
+                System.out.println("Il sesso può essere M (maschio) o F (femmina)");
+                paziente.setSesso("");
+            }
         }
+        while (paziente.getSesso().isEmpty() || paziente.anomaliaSesso() || (!paziente.getSesso().equalsIgnoreCase("m")
+                || !paziente.getSesso().equalsIgnoreCase("f")));
+
+        System.out.println("Inserire il gruppo sanguigno");
+        System.out.println("Gruppo: ");
+        do {
+            gruppoSanguigno[0] = MyLib.input();
+
+            if (gruppoSanguigno[0].isEmpty()) {
+                System.out.println(CAMPO_VUOTO);
+                gruppoSanguigno[0] = "";
+            }
+
+            if (!gruppoSanguigno[0].equalsIgnoreCase("a") || !gruppoSanguigno[0].equalsIgnoreCase("b") ||
+                    !gruppoSanguigno[0].equalsIgnoreCase("ab") || !gruppoSanguigno[0].equalsIgnoreCase("0")) {
+                System.out.println("Il gruppo sanguigno può essere solamente: A, B, AB, 0");
+                gruppoSanguigno[0] = "";
+            }
+        }
+        while (gruppoSanguigno[0].isEmpty() || (!gruppoSanguigno[0].equalsIgnoreCase("a") || !gruppoSanguigno[0].equalsIgnoreCase("b") ||
+                !gruppoSanguigno[0].equalsIgnoreCase("ab") || !gruppoSanguigno[0].equalsIgnoreCase("0")));
+
+        System.out.print("Rh: ");
+        do {
+            gruppoSanguigno[1] = MyLib.input();
+
+            if (gruppoSanguigno[1].isEmpty()) {
+                System.out.println(CAMPO_VUOTO);
+                gruppoSanguigno[1] = "";
+            }
+
+            if (!gruppoSanguigno[1].equalsIgnoreCase("positivo") || !gruppoSanguigno[1].equalsIgnoreCase("negativo")) {
+                System.out.println("Il fattore Rh può essere solamente positivo o negativo");
+                gruppoSanguigno[1] = "";
+            }
+        }
+        while (gruppoSanguigno[1].isEmpty() || (!gruppoSanguigno[1].equalsIgnoreCase("positivo") || !gruppoSanguigno[1].equalsIgnoreCase("negativo")));
+
+        paziente.creaCodiceSanitario();
+
+        System.out.println("Inserire il codice fiscale: ");
+        do {
+            paziente.setCodiceFiscale(MyLib.input());
+
+            if (paziente.getCodiceFiscale().isEmpty()) {
+                System.out.println(CAMPO_VUOTO);
+                paziente.setCodiceFiscale("");
+            }
+
+            if (!paziente.controlloCodiceFiscale()) {
+                System.out.println("Codice fiscale non valicdo");
+                paziente.setCodiceFiscale("");
+            }
+        }
+        while (paziente.getCodiceFiscale().isEmpty() || !paziente.controlloCodiceFiscale());
+
+
+
+
+
+
+
+
+    }
 
 
 

@@ -356,6 +356,22 @@ public class Utente {
         return false;
     }
 
+    public void aggiungiEsame(Esami esame) {
+        elencoEsami.add(esame);
+    }
+
+    public void controlloEsame(String esito, Esami esame) {
+        do {
+            esito = MyLib.input();
+            if (!esito.isEmpty()) {
+                esame.setEsito(esito);
+                aggiungiEsame(esame);
+            } else {
+                System.out.println(Input.CAMPO_VUOTO);
+            }
+        }
+        while (esito.isEmpty());
+    }
 
 
 

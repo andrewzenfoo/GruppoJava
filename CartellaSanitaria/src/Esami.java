@@ -1,100 +1,111 @@
-/**
- * Created by andrew on 5/31/16.
- */
 public class Esami {
 
     private String nome;
     private String tipoCampione;
-    private int tempoConsegna;
+    private String tempoConsegna;
     private double valoreMax;
     private double valoreMin;
+    private String valoreNormale;
+    private String valoreNormaleUomo;
+    private String valoreNormaleDonna;
     private String note;
     private String laboratorio;
-    private String tipoDiCampione;
-    private int quantitaMinima;
+    private String quantitaMinima;
     private String esito;
+    private String uda;
 
     ////////////////COSTRUTTORI/////////////////
 
-    public Esami(String nome, int quantitaMinima, double valoreMin, int tempoConsegna, String tipoCampione, double valoreMax, String note, String laboratorio, String tipoDiCampione) {
+    public Esami(String nome, String tipoCampione, String tempoConsegna, double valoreMax, String laboratorio, String esito) {
         this.nome = nome;
-        this.quantitaMinima = quantitaMinima;
-        this.valoreMin = valoreMin;
-        this.tempoConsegna = tempoConsegna;
         this.tipoCampione = tipoCampione;
+        this.tempoConsegna = tempoConsegna;
         this.valoreMax = valoreMax;
-        this.note = note;
         this.laboratorio = laboratorio;
-        this.tipoDiCampione = tipoDiCampione;
+        this.esito = esito;
     }
 
-    public Esami(String nome, String tipoCampione, int tempoConsegna, String note, String tipoDiCampione, int quantitaMinima, String laboratorio) {
-        this.nome = nome;
-        this.tipoCampione = tipoCampione;
-        this.tempoConsegna = tempoConsegna;
-        this.note = note;
-        this.tipoDiCampione = tipoDiCampione;
-        this.quantitaMinima = quantitaMinima;
-        this.laboratorio = laboratorio;
-    }
-
-    public Esami(String nome, String tipoCampione, int tempoConsegna, double valoreMax, double valoreMin, String laboratorio, String tipoDiCampione, int quantitaMinima) {
+    public Esami(String nome, String tipoCampione, String tempoConsegna, double valoreMax, double valoreMin, String laboratorio, String esito) {
         this.nome = nome;
         this.tipoCampione = tipoCampione;
         this.tempoConsegna = tempoConsegna;
         this.valoreMax = valoreMax;
         this.valoreMin = valoreMin;
         this.laboratorio = laboratorio;
-        this.tipoDiCampione = tipoDiCampione;
-        this.quantitaMinima = quantitaMinima;
+        this.esito = esito;
     }
 
-    public Esami(String nome, String tipoCampione, int tempoConsegna, String laboratorio, String tipoDiCampione, int quantitaMinima) {
+    public Esami(String nome, String tempoConsegna, String tipoCampione, String laboratorio, String esito) {
+        this.nome = nome;
+        this.tempoConsegna = tempoConsegna;
+        this.tipoCampione = tipoCampione;
+        this.laboratorio = laboratorio;
+        this.esito = esito;
+    }
+
+    public Esami(String nome, String tipoCampione, String tempoConsegna, String quantitaMinima, String laboratorio, String esito) {
         this.nome = nome;
         this.tipoCampione = tipoCampione;
         this.tempoConsegna = tempoConsegna;
-        this.laboratorio = laboratorio;
-        this.tipoDiCampione = tipoDiCampione;
         this.quantitaMinima = quantitaMinima;
+        this.laboratorio = laboratorio;
+        this.esito = esito;
     }
 
-    public Esami(String nome, String tipoCampione, int tempoConsegna, double valoreMax, String note, String laboratorio, String tipoDiCampione, int quantitaMinima) {
+    public Esami(String nome, String tempoConsegna, String laboratorio, String esito) {
+        this.nome = nome;
+        this.tempoConsegna = tempoConsegna;
+        this.laboratorio = laboratorio;
+        this.esito = esito;
+    }
+
+    public Esami(String nome, String tipoCampione, String tempoConsegna, double valoreMax, double valoreMin, String laboratorio, String quantitaMinima, String uda, String esito) {
         this.nome = nome;
         this.tipoCampione = tipoCampione;
         this.tempoConsegna = tempoConsegna;
         this.valoreMax = valoreMax;
-        this.note = note;
+        this.valoreMin = valoreMin;
         this.laboratorio = laboratorio;
-        this.tipoDiCampione = tipoDiCampione;
         this.quantitaMinima = quantitaMinima;
+        this.uda = uda;
+        this.esito = esito;
     }
 
-    public Esami(String nome, String tipoCampione, int tempoConsegna, String note, String laboratorio, String tipoDiCampione, int quantitaMinima, String esito) {
+    public Esami(String nome, String tipoCampione, String tempoConsegna, String valoreNormale, String laboratorio, String quantitaMinima, String esito, String uda) {
         this.nome = nome;
         this.tipoCampione = tipoCampione;
         this.tempoConsegna = tempoConsegna;
-        this.note = note;
+        this.valoreNormale = valoreNormale;
         this.laboratorio = laboratorio;
-        this.tipoDiCampione = tipoDiCampione;
+        this.quantitaMinima = quantitaMinima;
+        this.esito = esito;
+        this.uda = uda;
+    }
+
+    public Esami(String nome, String tipoCampione, String tempoConsegna, String valoreNormale, String laboratorio, String quantitaMinima, String esito) {
+        this.nome = nome;
+        this.tipoCampione = tipoCampione;
+        this.tempoConsegna = tempoConsegna;
+        this.valoreNormale = valoreNormale;
+        this.laboratorio = laboratorio;
         this.quantitaMinima = quantitaMinima;
         this.esito = esito;
     }
 
-    public Esami(String nome, int quantitaMinima, String tipoDiCampione, String laboratorio, String note, double valoreMax, double valoreMin, String tipoCampione, int tempoConsegna, String esito) {
+    public Esami(String nome, String tipoCampione, String tempoConsegna, String valoreNormaleUomo, String valoreNormaleDonna, String uda, String esito, String quantitaMinima, String laboratorio) {
         this.nome = nome;
-        this.quantitaMinima = quantitaMinima;
-        this.tipoDiCampione = tipoDiCampione;
-        this.laboratorio = laboratorio;
-        this.note = note;
-        this.valoreMax = valoreMax;
-        this.valoreMin = valoreMin;
         this.tipoCampione = tipoCampione;
         this.tempoConsegna = tempoConsegna;
+        this.valoreNormaleUomo = valoreNormaleUomo;
+        this.valoreNormaleDonna = valoreNormaleDonna;
+        this.uda = uda;
         this.esito = esito;
+        this.quantitaMinima = quantitaMinima;
+        this.laboratorio = laboratorio;
     }
-
 
     ///////////////GETTER & SETTER///////////////
+
 
     public String getNome() {
         return nome;
@@ -112,19 +123,11 @@ public class Esami {
         this.tipoCampione = tipoCampione;
     }
 
-    public double getValoreMax() {
-        return valoreMax;
-    }
-
-    public void setValoreMax(double valoreMax) {
-        this.valoreMax = valoreMax;
-    }
-
-    public int getTempoConsegna() {
+    public String getTempoConsegna() {
         return tempoConsegna;
     }
 
-    public void setTempoConsegna(int tempoConsegna) {
+    public void setTempoConsegna(String tempoConsegna) {
         this.tempoConsegna = tempoConsegna;
     }
 
@@ -136,12 +139,44 @@ public class Esami {
         this.valoreMin = valoreMin;
     }
 
+    public String getValoreNormale() {
+        return valoreNormale;
+    }
+
+    public void setValoreNormale(String valoreNormale) {
+        this.valoreNormale = valoreNormale;
+    }
+
+    public double getValoreMax() {
+        return valoreMax;
+    }
+
+    public void setValoreMax(double valoreMax) {
+        this.valoreMax = valoreMax;
+    }
+
+    public String getValoreNormaleUomo() {
+        return valoreNormaleUomo;
+    }
+
+    public void setValoreNormaleUomo(String valoreNormaleUomo) {
+        this.valoreNormaleUomo = valoreNormaleUomo;
+    }
+
     public String getNote() {
         return note;
     }
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getValoreNormaleDonna() {
+        return valoreNormaleDonna;
+    }
+
+    public void setValoreNormaleDonna(String valoreNormaleDonna) {
+        this.valoreNormaleDonna = valoreNormaleDonna;
     }
 
     public String getLaboratorio() {
@@ -152,19 +187,11 @@ public class Esami {
         this.laboratorio = laboratorio;
     }
 
-    public String getTipoDiCampione() {
-        return tipoDiCampione;
-    }
-
-    public void setTipoDiCampione(String tipoDiCampione) {
-        this.tipoDiCampione = tipoDiCampione;
-    }
-
-    public int getQuantitaMinima() {
+    public String getQuantitaMinima() {
         return quantitaMinima;
     }
 
-    public void setQuantitaMinima(int quantitaMinima) {
+    public void setQuantitaMinima(String quantitaMinima) {
         this.quantitaMinima = quantitaMinima;
     }
 
@@ -174,5 +201,13 @@ public class Esami {
 
     public void setEsito(String esito) {
         this.esito = esito;
+    }
+
+    public String getUda() {
+        return uda;
+    }
+
+    public void setUda(String uda) {
+        this.uda = uda;
     }
 }
